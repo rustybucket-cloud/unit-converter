@@ -1,8 +1,9 @@
-import { currency } from './currency-value.js';
+import { currency, weight } from './currency-value.js';
 
 const converter = document.querySelector('#converter-select');
 function selectConverter() {
     const converterValue = converter.value;
+    document.querySelector('#final').innerHTML = '';
     switch (converterValue) {
         case 'currency':
             fillSection(currency, 'Currency One', 'left');
@@ -11,12 +12,21 @@ function selectConverter() {
             directionDisplay();
             eventListeners();
         break;
+        case 'weight':
+            fillSection(weight, 'Unit One', 'left');
+            fillSection(weight, 'Unit Two', 'right');
+            conversionDirection('weight');
+            directionDisplay();
+            eventListeners();
+        break;
     }
 }
 converter.addEventListener("load", selectConverter());
+converter.addEventListener("change", selectConverter);
 
 function conversionDirection(unit) {
     const conversionDirection = document.querySelector('#conversionDirection');
+    conversionDirection.innerHTML = '';
     const oneToTwo = document.createTextNode(`${unit} one to ${unit} two`);
     const twoToOne = document.createTextNode(`${unit} two to ${unit} one`);
     const select1 = document.createElement('option');
@@ -32,6 +42,7 @@ function conversionDirection(unit) {
 function fillSection(unit, title, section) {
     //select which div to append the elements to
     const div = document.querySelector(`#${section}`);
+    div.innerHTML = '';
 
     //create title
     const titleEle = document.createElement("h3");
@@ -106,14 +117,19 @@ function conversionFunction() {
     let unit2Value = document.querySelector('#right > input').value;
     let result;
     if (document.querySelector('#conversionDirection').value === 'to right') {//refers to value of select that chooses which way the conversion happens
-        result = parseFloat(unit1Value) * conversionRate;
+        result = parseFloat(unit1Value) * conversionRate;//multiplies input with conversion rate
         const final = document.querySelector('#final');
         final.innerHTML = '';
-        if (unit2 !== 'Bitcoin') {
+        if (unit2 !== 'Bitcoin') {//sets the decimals to 2 unless the currency is Bitcoin
             result = result.toFixed(2);
         }
-        if (result !== NaN) {
-            const resultText = document.createTextNode(`${symbol1}${result}`);
+        if (result !== NaN) {//displays result of conversion with symbol if the result is a number
+            let resultText;
+            if (unit === 'currency') {
+                resultText = document.createTextNode(`${symbol1}${result}`);
+            } else {
+                resultText = document.createTextNode(`${result} ${symbol1}`);
+            }
             final.append(resultText);
         }
     }
@@ -125,7 +141,12 @@ function conversionFunction() {
             result = result.toFixed(2);
         }
         if (result !== NaN) {
-            const resultText = document.createTextNode(`${symbol1}${result}`);
+            let resultText
+            if (unit === 'currency') {
+                resultText = document.createTextNode(`${symbol2}${result}`);
+            } else {
+                resultText = document.createTextNode(`${result} ${symbol2}`);
+            }
             final.append(resultText);
         }
     }
