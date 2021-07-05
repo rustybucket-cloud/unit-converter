@@ -4,6 +4,7 @@
 body {
     margin: 0;
     height: 100vh;
+    width: 100vw;
 }
 main {
     height: 75%;
@@ -15,6 +16,7 @@ header {
     height: 10vh;
     display: flex;
     align-items:center;
+    width: 100%;
 }
 header h1 {
     margin: 0 0 0 2vw;
@@ -61,15 +63,19 @@ main {
 .converter-chart {
     width: 50vw;
     text-align: center;
-    height: 50vh;
+    height: 40vh;
     border-radius: 10px;
 }
 .converter-chart select {
+    width: 50%;
     height: 40px;
 }
 .converter-chart input {
     width: 50%;
     height: 40px;
+}
+[data-visible="no"] {
+    display: none;
 }
 #sides {
     display: flex;
@@ -83,21 +89,37 @@ main {
 .title select {
     margin: 0 0 8px 0;
 }
+.title p {
+    margin: auto auto auto 0;
+}
 .options {
     height: 100%;
     width: 100%;
     background-color: #A8B1FF;
     border-radius: 10px;
     margin-top: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#result {
+    background-color: #A8B1FF;
+    height: 25%;
+    margin: 16px 0 0 0;
+    border-radius: 10px;
 }
 #left {
     margin-right: 8px;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 700px) {
     main {
         height: 50%;
     }
     .converter-chart {
+        width: 90%;
+    }
+    .converter-chart input, .converter-chart select {
         width: 90%;
     }
 }
