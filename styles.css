@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    height: 100vh;
+}
+main {
+    height: 75%;
+}
+
+header {
+    background-color: #909BFF;
+    margin: 0;
+    height: 10vh;
+    display: flex;
+    align-items:center;
+}
+header h1 {
+    margin: 0 0 0 2vw;
+}
+
+nav {
+    background-color: #B39940;
+    margin: 0;
+    height: 5vh;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    display: flex;
+    padding: 0;
+    width: 50%;
+    height: 100%;
+}
+nav li {
+    margin: 0 0 0 2vw;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+nav a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #525CB3;
+}
+nav a:hover {
+    background-color: #525CB3;
+    color: #B39940;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.converter-chart {
+    width: 50vw;
+    text-align: center;
+    height: 50vh;
+    border-radius: 10px;
+}
+.converter-chart select {
+    height: 40px;
+}
+.converter-chart input {
+    width: 50%;
+    height: 40px;
+}
+#sides {
+    display: flex;
+    height: 100%;
+}
+.title {
+    background-color: #A8B1FF;
+    border-radius: 10px;
+    width: 100%;
+}
+.title select {
+    margin: 0 0 8px 0;
+}
+.options {
+    height: 100%;
+    width: 100%;
+    background-color: #A8B1FF;
+    border-radius: 10px;
+    margin-top: 8px;
+}
+#left {
+    margin-right: 8px;
+}
+@media screen and (max-width: 800px) {
+    main {
+        height: 50%;
+    }
+    .converter-chart {
+        width: 90%;
+    }
+}
