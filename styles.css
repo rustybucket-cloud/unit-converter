@@ -75,7 +75,7 @@ main {
     height: 40px;
 }
 [data-visible="no"] {
-    display: none;
+    visibility: hidden;
 }
 #sides {
     display: flex;
@@ -108,9 +108,16 @@ main {
     height: 25%;
     margin: 16px 0 0 0;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #left {
     margin-right: 8px;
+}
+#final {
+    font-size: 2rem;
+    margin: 0;
 }
 @media screen and (max-width: 700px) {
     main {

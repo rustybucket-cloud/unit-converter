@@ -87,33 +87,64 @@ function conversionFunction() {
     let unit2Exchange;
     //eval() lets us turn the string from var unit into something we can use to call an object
     const obj = eval(unit);
+    let symbol1;//find symbols for selected currencies, to be used later
+    let symbol2;
     for (let i = 0; i < obj.length; i++) {
         if (obj[i].name === unit1) {
             unit1Exchange = obj[i].exchange;
+            symbol1 = obj[i].sign;
         }
         if (obj[i].name === unit2) {
             unit2Exchange = obj[i].exchange;
+            symbol2 = obj[i].sign;
         }
     }
-    const conversionRate = unit1Exchange / unit2Exchange;
+    const conversionRate = unit2Exchange / unit1Exchange;
 
     //find the value of the inputs
-    const unit1Value = document.querySelector('#left > input').value;
-    const unit2Value = document.querySelector('#right > input').value;
-    console.log(unit1Value + unit2Value);
-    if (unit1Value !== '') {
-
+    let unit1Value = document.querySelector('#left > input').value;
+    let unit2Value = document.querySelector('#right > input').value;
+    let result;
+    if (document.querySelector('#conversionDirection').value === 'to right') {//refers to value of select that chooses which way the conversion happens
+        result = parseFloat(unit1Value) * conversionRate;
+        const final = document.querySelector('#final');
+        final.innerHTML = '';
+        if (unit2 !== 'Bitcoin') {
+            result = result.toFixed(2);
+        }
+        if (result !== NaN) {
+            const resultText = document.createTextNode(`${symbol1}${result}`);
+            final.append(resultText);
+        }
     }
+    else if (document.querySelector('#conversionDirection').value === 'to left') { 
+        result = parseFloat(unit2Value) * unit1Exchange / unit2Exchange;
+        const final = document.querySelector('#final');
+        final.innerHTML = '';
+        if (unit1 !== 'Bitcoin') {
+            result = result.toFixed(2);
+        }
+        if (result !== NaN) {
+            const resultText = document.createTextNode(`${symbol1}${result}`);
+            final.append(resultText);
+        }
+    }
+
+    //post result in div#result
+    
 }
 
 function eventListeners() {
     const inputs = document.querySelectorAll('.input-value');
-    const inputArray = [...inputs];
+    const selects = document.querySelectorAll('.unitSelect');
     /*inputs.forEach( element => {
         console.log(element.id);
         element.addEventListener('input', conversionFunction());
     });*/
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].addEventListener('input', conversionFunction);
+    }
+    for (let i = 0; i < selects.length; i++) {
+        selects[i].addEventListener('change', conversionFunction);
     }
 }

@@ -26,7 +26,7 @@ export const currency = [
     {
         id: 4,
         name: "Bitcoin",
-        sigm: "₿",
+        sign: "₿",
         exchange: .00003
     },
     {
